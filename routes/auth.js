@@ -45,8 +45,8 @@ router.post("/signin", (req, res, next) => {
       }
       // user has been found in DB !
       if (bcrypt.compareSync(user.password, dbRes.password)) {
-        req.session.currentUser = dbRes; // user is now in session... until session.destroy
-        return res.render("products");
+        req.session.currentUser = dbRes;
+        return res.redirect("/");
       } else {
         return res.render("signin", {
           msg: { text: "Password is wrong..", status: "wrong" }
@@ -58,4 +58,11 @@ router.post("/signin", (req, res, next) => {
       res.redirect("/signin");
     });
 });
+
+router.get("/logout", (req, res)=>{
+    req.session.destroy(err =>{
+        res.locals.isLoggedIn = undefined;
+        res.redirect("/signin");
+    })
+})
 module.exports = router;
