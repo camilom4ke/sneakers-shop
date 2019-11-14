@@ -32,30 +32,14 @@ router.get("/sneakers/:cat", (req, res) => {
   if (req.params.cat === "women") query.category = "women"
   if (req.params.cat === "kids") query.category = "kids"
   const sneaker = sneakerModel.find(query).populate("tags");
+  
+  const tags = sneakerModel.find(query.tags).populate("tags");
 
-  Promise.all([sneaker])
+  Promise.all([sneaker, tags])
     .then(dbRes => {
       res.render("products", {
-        sneaker: dbRes[0]
-      });
-    })
-    .catch(asyncErr => console.log(asyncErr));
-});
-
-// Render category products
-router.get("/sneakers/:cat", (req, res) => {
-  console.log(req.params.cat)
-
-  const query = {};
-  if (req.params.cat === "men") query.category = "men"
-  if (req.params.cat === "women") query.category = "women"
-  if (req.params.cat === "kids") query.category = "kids"
-  const sneaker = sneakerModel.find(query).populate("tags");
-
-  Promise.all([sneaker])
-    .then(dbRes => {
-      res.render("products", {
-        sneaker: dbRes[0]
+        sneaker: dbRes[0],
+        tags: dbRes[1]
       });
     })
     .catch(asyncErr => console.log(asyncErr));
