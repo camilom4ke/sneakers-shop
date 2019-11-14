@@ -51,6 +51,7 @@
   <div class="add-tag-form">
     <p id="add-tag-message" class="msg"></p>
     <h3 class="form-title">Add tags</h3>
+    
     <form action="/add-tag" method="post">
       <div class="form-item-wrapper flexed-item">
         <label for="category-name" class="category-name label">Sneaker tag</label>
@@ -58,5 +59,8 @@
       </div>
       <button id="btn_new_tag" class="button-primary add-category-btn">Create this category</button>
     </form>
+    {{#if msg}}
+    <p class="message {{msg.status}}">{{msg.text}}</p>
+    {{/if}}
   </div>
 </div>

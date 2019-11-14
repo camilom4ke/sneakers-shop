@@ -8,9 +8,9 @@ const tagModel = require("./../models/Tag");
 // ADD SNEAKER
 router.get("/prod-add", (req, res) => {
   tagModel
-  .find()
-  .then(dbRes => res.render("products_add", {tags: dbRes}))
-  .catch()
+    .find()
+    .then(dbRes => res.render("products_add", { tags: dbRes }))
+    .catch();
 });
 
 router.post("/prod-add", (req, res) => {
@@ -22,11 +22,23 @@ router.post("/prod-add", (req, res) => {
 });
 //ADD TAG
 router.post("/add-tag", (req, res) => {
-  console.log(req.body);
   tagModel
-    .create(req.body)
-    // A faire en AJAX pour qu'il s'ajoute sans rafraichir la page
-    .then(res.redirect("/prod-add"))
+    .find(req.body)
+    .then(dbRes => {
+      if (dbRes) {
+        res.render("products_add", {
+          msg: {
+            text: "This tag already exists..",
+            status: "wrong"
+          }
+        });
+        return;
+      }
+      tagModel
+        .create(req.body)
+        .then(() => res.redirect("/prod-add"))
+        .catch(err => console.log(err));
+    })
     .catch(err => console.log(err));
 });
 
@@ -44,10 +56,24 @@ router.get("/product-edit/:id", (req, res) => {
   sneakerModel
     .findById(req.params.id)
     .then(dbRes => {
-        console.log(dbRes)
-        res.render("product_edit", { sneaker: dbRes })
-    });
+      tagModel
+        .find()
+        .then(dbTag =>
+          res.render("product_edit", { sneaker: dbRes, tags: dbTag })
+        )
+        .catch(dbErr => console.log(dbErr));
+    })
+    .catch();
 });
+router.post("/product-edit/:id", (req, res) => {
+  console.log(req.body);
+  sneakerModel
+    .findByIdAndUpdate(req.params.id, req.body)
+    // A faire en AJAX pour qu'il s'ajoute sans rafraichir la page
+    .then(res.redirect("/prod-manage"))
+    .catch(err => console.log(err));
+});
+
 //DELETE
 router.get("/product-delete/:id", (req, res) => {
   sneakerModel
