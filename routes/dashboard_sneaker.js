@@ -23,23 +23,16 @@ router.post("/prod-add", (req, res) => {
 //ADD TAG
 router.post("/add-tag", (req, res) => {
   tagModel
-    .find(req.body)
-    .then(dbRes => {
-      if (dbRes) {
-        res.render("products_add", {
-          msg: {
-            text: "This tag already exists..",
-            status: "wrong"
-          }
-        });
-        return;
-      }
-      tagModel
-        .create(req.body)
-        .then(() => res.redirect("/prod-add"))
-        .catch(err => console.log(err));
-    })
-    .catch(err => console.log(err));
+    .create(req.body)
+    .then(() => res.redirect("/prod-add"))
+    .catch(() =>
+      res.send("products_add", {
+        msg: {
+          text: "This user account has not been found..",
+          status: "wrong"
+        }
+      })
+    );
 });
 
 //MANAGE SNEAKER VIEW
