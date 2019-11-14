@@ -9,8 +9,22 @@ const sneakerModel = require("./../models/Sneaker");
 const tagModel = require("./../models/Tag");
 // -----------------------------------------
 
-router.get("/", (req, res) => {
-    res.render("index");
-  });
+
+//------------------------------------------
+// ROUTER ADD PRODUCT
+// -----------------------------------------
+router.get("/prod-add", (req, res) => {
+    res.render("products_add");
+});
+// -----------------------------------------
+
+
+//------------------------------------------
+// ROUTER MANAGE PRODUCT
+// -----------------------------------------
+router.get("/prod-manage", (req, res) => {
+    res.render("product_edit");
+});
+// -----------------------------------------
 
 module.exports = router;
