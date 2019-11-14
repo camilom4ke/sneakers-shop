@@ -14,11 +14,11 @@ router.get("/one-product/:id", (req, res) => {
 });
 
 router.get("/signup", (req, res) => {
-  res.send("sneak");
+  res.send("signup");
 });
 
 router.get("/signin", (req, res) => {
-  res.send("love");
+  res.send("signin");
 });
 
 
