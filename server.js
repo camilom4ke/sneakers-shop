@@ -58,7 +58,7 @@ function checkloginStatus(req, res, next) {
 
 function eraseSessionMessage() {
   var count = 0; // initialize counter in parent scope and use it in inner function
-  return function(req, res, next) {
+  return function (req, res, next) {
     if (req.session.msg) {
       // only increment if session contains msg
       if (count) {
@@ -75,9 +75,19 @@ function eraseSessionMessage() {
 app.use(checkloginStatus);
 app.use(eraseSessionMessage());
 
-// Getting/Using router(s)
+
+//------------------------------------------
+// SPLITED ROUTING: Getting/Using router(s)
+// -----------------------------------------
 const basePageRouter = require("./routes/index.js");
+const authRouter = require("./routes/auth.js");
+const dashboardSneakersRouter = require("./routes/dashboard_sneaker.js");
+
 app.use(basePageRouter);
+app.use(dashboardSneakersRouter);
+app.use("/auth", authRouter);
+
+// -----------------------------------------
 
 const listener = app.listen(process.env.PORT, () => {
   console.log(`app started at ${process.env.SITE_URL}:${process.env.PORT}`);
