@@ -43,9 +43,13 @@ app.locals.site_url = process.env.SITE_URL;
 // used in front end to perform ajax request (var instead of hardcoded)
 
 // CUSTOM MIDDLEWARE
+
 // check if user is logged in... 
+
 // usecases : conditional display in hbs templates
+
 // WARNING: this function must be declared AFTER the session setup
+
 // WARNING: this function must be declared BEFORE app.use(router(s))
 function checkloginStatus(req, res, next) {
   res.locals.user = req.session.currentUser ? req.session.currentUser : null; 
