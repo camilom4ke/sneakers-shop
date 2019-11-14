@@ -2,12 +2,20 @@ const mongoose = require("mongoose"); // import mongoose dependencie
 
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
-  name: String,
-  lastname: String,
-  email: String,
-  password: String
-});
+const userSchema = new Schema(
+  {
+    name: String,
+    lastname: String,
+    email: String,
+    password: String
+  },
+  {
+    timestamps: {
+      createdAt: "created_at",
+      updatedAt: "updated_at"
+    }
+  }
+);
 
 const userModel = mongoose.model("User", userSchema);
 
