@@ -23,12 +23,30 @@ router.get("/signin", (req, res) => {
   res.render("signin");
 });
 
-// Render products
+// Render category products
 router.get("/sneakers/:cat", (req, res) => {
   console.log(req.params.cat)
 
   const query = {};
-  if (req.params.cat === "collection") query.category = "collection"
+  if (req.params.cat === "men") query.category = "men"
+  if (req.params.cat === "women") query.category = "women"
+  if (req.params.cat === "kids") query.category = "kids"
+  const sneaker = sneakerModel.find(query).populate("tags");
+
+  Promise.all([sneaker])
+    .then(dbRes => {
+      res.render("products", {
+        sneaker: dbRes[0]
+      });
+    })
+    .catch(asyncErr => console.log(asyncErr));
+});
+
+// Render category products
+router.get("/sneakers/:cat", (req, res) => {
+  console.log(req.params.cat)
+
+  const query = {};
   if (req.params.cat === "men") query.category = "men"
   if (req.params.cat === "women") query.category = "women"
   if (req.params.cat === "kids") query.category = "kids"
