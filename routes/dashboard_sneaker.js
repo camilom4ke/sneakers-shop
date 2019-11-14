@@ -48,6 +48,7 @@ router.get("/prod-manage", (req, res) => {
 router.get("/product-edit/:id", (req, res) => {
   sneakerModel
     .findById(req.params.id)
+    .populate("tags")
     .then(dbRes => {
       tagModel
         .find()
