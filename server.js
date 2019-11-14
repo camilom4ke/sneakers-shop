@@ -1,9 +1,9 @@
 return console.log("node says : waxOn/waxOff !");
+// initial config
 
-require("dotenv").config();
+require("dotenv").config()
 require("./config/mongodb"); // database initial setup
 require("./utils/helpers-hbs"); // utils for hbs templates
-
 
 // base dependencies
 const express = require("express");
@@ -77,7 +77,7 @@ app.use(checkloginStatus);
 app.use(eraseSessionMessage());
 
 // Getting/Using router(s)
-const basePageRouter = require("./routes/index");
+const basePageRouter = require("./routes/index.js");
 app.use("/", basePageRouter);
 
 const listener = app.listen(process.env.PORT, () => {
