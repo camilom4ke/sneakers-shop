@@ -58,5 +58,9 @@
   border-bottom: 1px solid rgb(52, 52, 255);
 }
 
-
+.message{
+  color: red;
+  font-weight: bold
+  /* margin-bottom: 10px; */
+}
 
