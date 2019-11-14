@@ -1,5 +1,4 @@
 const mongoose = require("mongoose"); // import mongoose dependencie
-
 const Schema = mongoose.Schema;
 
 const sneakerSchema = new Schema({
@@ -8,7 +7,7 @@ const sneakerSchema = new Schema({
   sizes: Number,
   description: Number,
   price: Number,
-  category: [men, women, kids],
+  category: ['men', 'women', 'kids'],
   tags: {
     type: Schema.Types.ObjectId,
     ref: "Tag"
