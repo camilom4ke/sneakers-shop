@@ -16,10 +16,10 @@ router.get("/signin", (req, res) => {
 
 // Render products
 router.get("/sneakers/:cat", (req, res) => {
-  res.send("bar");
+  res.render("products");
 });
 
 router.get("/one-product/:id", (req, res) => {
-  res.send("baz");
+  res.render("one_product");
 });
 module.exports = router;
