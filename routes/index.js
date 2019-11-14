@@ -32,8 +32,10 @@ router.get("/sneakers/:cat", (req, res) => {
   if (req.params.cat === "women") query.category = "women"
   if (req.params.cat === "kids") query.category = "kids"
   const sneaker = sneakerModel.find(query).populate("tags");
-  
+
   const tags = sneakerModel.find(query.tags).populate("tags");
+
+  console.log(tags)
 
   Promise.all([sneaker, tags])
     .then(dbRes => {

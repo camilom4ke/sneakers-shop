@@ -8,10 +8,10 @@ const sneakerSchema = new Schema({
   description: String,
   price: Number,
   category: ["men", "women", "kids"],
-  tags: {
+  tags: [{
     type: Schema.Types.ObjectId,
     ref: "Tag"
-  }
+  }]
 });
 
 const sneakerModel = mongoose.model("Sneaker", sneakerSchema);
