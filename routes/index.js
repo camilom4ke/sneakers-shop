@@ -5,7 +5,7 @@ router.get("/", (req, res) => {
   res.render("index");
 });
 
-//Sign IN & UP
+//Render signin & signup
 router.get("/signup", (req, res) => {
   res.render("signup");
 });
@@ -14,7 +14,7 @@ router.get("/signin", (req, res) => {
   res.render("signin");
 });
 
-// Products
+// Render products
 router.get("/sneakers/:cat", (req, res) => {
   res.send("bar");
 });
