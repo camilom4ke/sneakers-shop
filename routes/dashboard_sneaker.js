@@ -7,7 +7,10 @@ const tagModel = require("./../models/Tag");
 
 // ADD SNEAKER
 router.get("/prod-add", (req, res) => {
-  res.render("products_add");
+  tagModel
+  .find()
+  .then(dbRes => res.render("products_add", {tags: dbRes}))
+  .catch()
 });
 
 router.post("/prod-add", (req, res) => {
@@ -36,11 +39,21 @@ router.get("/prod-manage", (req, res) => {
     })
     .catch(dbErr => console.log(dbErr));
 });
-
+//EDIT
 router.get("/product-edit/:id", (req, res) => {
   sneakerModel
     .findById(req.params.id)
-    .then(dbRes => res.render("product_edit", { sneaker: dbRes }));
+    .then(dbRes => {
+        console.log(dbRes)
+        res.render("product_edit", { sneaker: dbRes })
+    });
+});
+//DELETE
+router.get("/product-delete/:id", (req, res) => {
+  sneakerModel
+    .findByIdAndRemove(req.params.id)
+    .then(dbRes => res.redirect("/prod-manage"))
+    .catch(err => console.log(err));
 });
 
 module.exports = router;
