@@ -25,7 +25,6 @@ router.get("/signin", (req, res) => {
 
 // Render category products
 router.get("/sneakers/:cat", (req, res) => {
-  // console.log(req.params.cat)
 
   const query = {};
   if (req.params.cat === "men") query.category = "Men"
@@ -33,7 +32,7 @@ router.get("/sneakers/:cat", (req, res) => {
   if (req.params.cat === "kids") query.category = "Kids"
   const sneaker = sneakerModel.find(query).populate("tags");
 
-  const tags = tagModel.find(query.tags);
+  const tags = tagModel.find();
 
   // console.log(tags)
 
@@ -48,6 +47,16 @@ router.get("/sneakers/:cat", (req, res) => {
 });
 
 router.get("/one-product/:id", (req, res) => {
-  res.render("one_product");
+  // const sneakerId = req.params.id;
+
+  sneakerModel
+    .findById(req.params.id)
+    .then(dbRes => {
+      res.render("one_product", {
+        sneaker: dbRes
+      });
+    })
+    .catch(asyncErr => console.log(asyncErr));
 });
+
 module.exports = router;
