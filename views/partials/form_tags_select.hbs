@@ -1,5 +1,5 @@
 <select name="tags" id="tags" class="select">
-    <option value="{{sneaker.tags.name}}" selected>{{sneaker.tags.name}}</option>
+    <option value="{{sneaker.tags.0.name}}" selected>{{sneaker.tags.0.name}}</option>
     <option disabled>──────────</option>
     {{#each tags}}
     <option value="{{this._id}}">{{this.name}}</option>

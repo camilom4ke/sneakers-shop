@@ -56,9 +56,10 @@ router.get("/product-edit/:id", isLoggedIn, (req, res) => {
     .then(dbRes => {
       tagModel
         .find()
-        .then(dbTag =>
-          res.render("product_edit", { sneaker: dbRes, tags: dbTag })
-        )
+        .then(dbTag => {
+          console.log(dbRes);
+          res.render("product_edit", { sneaker: dbRes, tags: dbTag });
+        })
         .catch(dbErr => console.log(dbErr));
     })
     .catch();
