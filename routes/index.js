@@ -25,15 +25,17 @@ router.get("/signin", (req, res) => {
 
 // Render category products
 router.get("/sneakers/:cat", (req, res) => {
-  console.log(req.params.cat)
+  // console.log(req.params.cat)
 
   const query = {};
-  if (req.params.cat === "men") query.category = "men"
-  if (req.params.cat === "women") query.category = "women"
-  if (req.params.cat === "kids") query.category = "kids"
+  if (req.params.cat === "men") query.category = "Men"
+  if (req.params.cat === "women") query.category = "Women"
+  if (req.params.cat === "kids") query.category = "Kids"
   const sneaker = sneakerModel.find(query).populate("tags");
-  
-  const tags = sneakerModel.find(query.tags).populate("tags");
+
+  const tags = tagModel.find(query.tags);
+
+  // console.log(tags)
 
   Promise.all([sneaker, tags])
     .then(dbRes => {
