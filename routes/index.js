@@ -47,11 +47,16 @@ router.get("/sneakers/:cat", (req, res) => {
 });
 
 router.get("/one-product/:id", (req, res) => {
-  const sneakerId = req.params.id;
+  // const sneakerId = req.params.id;
 
   sneakerModel
-    .find()
-
-  res.render("one_product");
+    .findById(req.params.id)
+    .then(dbRes => {
+      res.render("one_product", {
+        sneaker: dbRes
+      });
+    })
+    .catch(asyncErr => console.log(asyncErr));
 });
+
 module.exports = router;
