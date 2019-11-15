@@ -21,8 +21,9 @@ width: 50%;
   margin-right: 3.5rem;
 }
 
-h2.logo-item {
-  font-size: 2rem;
+.logo-item {
+  max-width: 150px;
+  margin-top: 4px;
 }
 
 .nav-item {

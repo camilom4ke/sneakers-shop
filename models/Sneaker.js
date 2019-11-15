@@ -10,7 +10,7 @@ const sneakerSchema = new Schema({
   image: {
     type: String,
     default:
-      "https://www.plutosport.fr/media/catalog/product/cache/image/1800x/040ec09b1e35df139433887a97daa66f/N/i/Nike_Air_Max_Vision_GS__5.jpg"
+      "https://res.cloudinary.com/camilosorio/image/upload/v1573819261/sneakers-pictures/mrcr2lq3yzfso226k5k9.png"
   },
   category: ["men", "women", "kids"],
   tags: [
