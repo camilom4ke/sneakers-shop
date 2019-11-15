@@ -4,6 +4,7 @@ const isLoggedIn = require("../middlewares/isLoggedIn");
 //requiring Models
 const sneakerModel = require("./../models/Sneaker");
 const tagModel = require("./../models/Tag");
+const uploader = require("./../config/cloudinary");
 
 // ADD SNEAKER
 router.get("/prod-add", isLoggedIn, (req, res) => {
@@ -17,10 +18,22 @@ router.get("/prod-add", isLoggedIn, (req, res) => {
     .catch();
 });
 
-router.post("/prod-add", isLoggedIn, (req, res) => {
-  console.log(req.body);
+router.post("/prod-add", isLoggedIn, uploader.single("image"), (req, res) => {
+  const newSneaker = {
+    name: req.body.name,
+    ref: req.body.ref,
+    price: req.body.price,
+    size: req.body.size,
+    description: req.body.description,
+    category: req.body.category,
+    id_tags: req.body.tags
+  };
+  if (req.file) {
+    newSneaker.image = req.file.secure_url;
+  }
+  console.log(req);
   sneakerModel
-    .create(req.body)
+    .create(newSneaker)
     .then(res.redirect("/prod-manage"))
     .catch(err => console.log(err));
 });
