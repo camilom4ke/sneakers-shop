@@ -9,7 +9,6 @@ const tagModel = require("./../models/Tag");
 const userModel = require("./../models/User");
 // -----------------------------------------
 
-
 router.get("/", (req, res) => {
   res.render("index");
 });
@@ -25,11 +24,10 @@ router.get("/signin", (req, res) => {
 
 // Render category products
 router.get("/sneakers/:cat", (req, res) => {
-
   const query = {};
-  if (req.params.cat === "men") query.category = "Men"
-  if (req.params.cat === "women") query.category = "Women"
-  if (req.params.cat === "kids") query.category = "Kids"
+  if (req.params.cat === "men") query.category = "Men";
+  if (req.params.cat === "women") query.category = "Women";
+  if (req.params.cat === "kids") query.category = "Kids";
   const sneaker = sneakerModel.find(query).populate("tags");
 
   const tags = tagModel.find();
@@ -40,7 +38,8 @@ router.get("/sneakers/:cat", (req, res) => {
     .then(dbRes => {
       res.render("products", {
         sneaker: dbRes[0],
-        tags: dbRes[1]
+        tags: dbRes[1],
+        scripts: ["filter_tag.js"]
       });
     })
     .catch(asyncErr => console.log(asyncErr));
