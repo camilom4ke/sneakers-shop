@@ -51,6 +51,15 @@ router.post("/add-tag", isLoggedIn, (req, res) => {
       })
     );
 });
+//MODIFY TAG
+router.patch("/edit-tag/:id", isLoggedIn, (req, res) => {
+  console.log("yo", req.body);
+
+  tagModel
+    .findByIdAndUpdate(req.params.id, req.body, { new: true })
+    .then(dbRes => res.send(dbRes))
+    .catch(err => console.log(err));
+});
 
 //MANAGE SNEAKER VIEW
 router.get("/prod-manage", isLoggedIn, (req, res) => {
@@ -100,7 +109,7 @@ router.get("/tags-manage", isLoggedIn, (req, res) => {
   tagModel
     .find()
     .then(dbRes => {
-      res.render("tags_manage", { tags: dbRes });
+      res.render("tags_manage", { tags: dbRes, scripts: ["edit_tags.js"] });
     })
     .catch(dbErr => console.log(dbErr));
 });
@@ -112,26 +121,3 @@ router.get("/tag-delete/:id", isLoggedIn, (req, res) => {
     .then(dbRes => res.redirect("/tags-manage"))
     .catch(err => console.log(err));
 });
-//EDIT
-// router.get("/product-edit/:id", isLoggedIn, (req, res) => {
-//   tagModel
-//     .findById(req.params.id)
-//     .then(dbRes => {
-//       tagModel
-//         .find()
-//         .then(dbTag => {
-//           console.log(dbRes);
-//           res.render("product_edit", { sneaker: dbRes, tags: dbTag });
-//         })
-//         .catch(dbErr => console.log(dbErr));
-//     })
-//     .catch();
-// });
-// router.post("/product-edit/:id", isLoggedIn, (req, res) => {
-//   console.log(req.body);
-//   sneakerModel
-//     .findByIdAndUpdate(req.params.id, req.body)
-//     // A faire en AJAX pour qu'il s'ajoute sans rafraichir la page
-//     .then(res.redirect("/prod-manage"))
-//     .catch(err => console.log(err));
-// });

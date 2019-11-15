@@ -1,8 +1,10 @@
 <td class="table-division">
-  <div>{{this.name}}</div>
+  <blockquote data-id-tag="{{this._id}}" contenteditable="true">
+    <p>{{this.name}}</p>
+  </blockquote>
 </td>
-<td class="table-division">
-  <a href="/tag-edit/{{this._id}}" data-id-tag="{{this._id}}" class="fa fa-edit table-icon"></a>
+<td class=" table-division">
+  <div data-id-tag="{{this._id}}" class="fa fa-edit table-icon"></div>
 </td>
 <td class="table-division">
   <a href="/tag-delete/{{this._id}}" data-id-tag="{{this._id}}" class="fa fa-trash table-icon"></a>
