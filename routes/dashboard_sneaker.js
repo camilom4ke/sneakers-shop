@@ -94,4 +94,44 @@ router.get("/product-delete/:id", isLoggedIn, (req, res) => {
     .catch(err => console.log(err));
 });
 
+//Manage TAGS
+//RENDER
+router.get("/tags-manage", isLoggedIn, (req, res) => {
+  tagModel
+    .find()
+    .then(dbRes => {
+      res.render("tags_manage", { tags: dbRes });
+    })
+    .catch(dbErr => console.log(dbErr));
+});
 module.exports = router;
+//DELETE
+router.get("/tag-delete/:id", isLoggedIn, (req, res) => {
+  tagModel
+    .findByIdAndRemove(req.params.id)
+    .then(dbRes => res.redirect("/tags-manage"))
+    .catch(err => console.log(err));
+});
+//EDIT
+// router.get("/product-edit/:id", isLoggedIn, (req, res) => {
+//   tagModel
+//     .findById(req.params.id)
+//     .then(dbRes => {
+//       tagModel
+//         .find()
+//         .then(dbTag => {
+//           console.log(dbRes);
+//           res.render("product_edit", { sneaker: dbRes, tags: dbTag });
+//         })
+//         .catch(dbErr => console.log(dbErr));
+//     })
+//     .catch();
+// });
+// router.post("/product-edit/:id", isLoggedIn, (req, res) => {
+//   console.log(req.body);
+//   sneakerModel
+//     .findByIdAndUpdate(req.params.id, req.body)
+//     // A faire en AJAX pour qu'il s'ajoute sans rafraichir la page
+//     .then(res.redirect("/prod-manage"))
+//     .catch(err => console.log(err));
+// });

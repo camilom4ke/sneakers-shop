@@ -1,0 +1,24 @@
+<div class="big-container manage-products-wrapper">
+  <h3 class="manage-products-title">Manage your tags</h3>
+  <table class="-tags">
+    <thead>
+      <tr class="table-row">
+        <th class="table-head">Tag Name</th>
+        <th class="table-head">Edit</th>
+        <th class="table-head">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each tags}}
+      <tr class="table-row">
+        {{> dashboard_tags_row}}
+      </tr>
+      {{/each}}
+      {{#unless tags}}
+      <tr>
+        <td colspan="3">Sorry no tags yet..</td>
+      </tr>
+      {{/unless}}
+    </tbody>
+  </table>
+</div>
